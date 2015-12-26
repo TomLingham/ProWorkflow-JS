@@ -1,4 +1,4 @@
-
+import PWFCompanies  from './Parts/Companies';
 
 let PWF = ( options )=>{
 
@@ -27,7 +27,9 @@ let PWF = ( options )=>{
 
         getConfig:()=>{
             return Object.assign( {}, config );
-        }
+        },
+
+        company: PWFCompanies( config )
     }
 };
 
