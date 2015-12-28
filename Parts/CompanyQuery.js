@@ -1,7 +1,8 @@
+import stampit from 'stampit';
+import QueryObject from './QueryObject'
 
-let PWFCompanies = ( config ) => {
-
-    let query = {
+const Company = stampit().props({
+    query: {
         fields: [
             'address',
             'code',
@@ -40,26 +41,9 @@ let PWFCompanies = ( config ) => {
             sortby: 'name',
             sortorder: 'asc'
         }
-    };
+    }
+});
 
+const CompanyQueryObject = Company.compose(QueryObject);
 
-    let self = {
-
-        where: ( field, value )=>{
-
-            if( query.filters[field] !== undefined )
-                query.filters[field] = value;
-
-            return self;
-        },
-
-        getQuery: ()=>{
-            return Object.assign({}, query);
-        }
-    };
-
-    return self;
-};
-
-
-export default PWFCompanies;
+export default CompanyQueryObject;

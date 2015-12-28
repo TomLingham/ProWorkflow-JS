@@ -1,36 +1,27 @@
-import PWFCompanies  from './Parts/Companies';
-
-let PWF = ( options )=>{
-
-
-    let config = require('./config');
-
-    Object.assign(config, options)
+import stampit from 'stampit';
+import CompanyQueryObject  from './Parts/CompanyQuery';
 
 
-    return {
+const ProWorkflow = stampit().init(({ instance })=>{
 
-        setup: ( apikey = null, email = null, password = null )=>{
+    instance.Company = CompanyQueryObject( instance )
 
-            if (apikey && email && password) {
-                config.auth = {
-                    apikey: apikey,
-                    email: email,
-                    password: password
-                };
+}).methods({
 
-                return console.info(`API credentials set: "${apikey}", "${email}", "${password}"`)
-            }
+    setup( apikey = null, email = null, password = null ){
 
-            return console.error("Must enter all credentials during setup.");
-        },
+        if (apikey && email && password) {
+            this.config.auth = {
+                apikey: apikey,
+                email: email,
+                password: password
+            };
+        }
 
-        getConfig:()=>{
-            return Object.assign( {}, config );
-        },
-
-        company: PWFCompanies( config )
+        console.error("Must enter all credentials during setup.")
     }
-};
 
-export default PWF;
+});
+
+
+export default ProWorkflow;

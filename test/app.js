@@ -1,11 +1,4 @@
-import PWF from "./local.config";
+import ProWorkflow from "./local.config";
 
 
-console.log(
-
-    PWF.company
-        .where('searchname', 'a test name')
-        .where('pending', true)
-        .getQuery()
-
-);
+ProWorkflow.Company.get();
