@@ -1,8 +1,9 @@
-import stampit from 'stampit';
-import QueryObject from './QueryObject'
+import Finder from './Finder';
+import Creator from './Creator';
+import ModelComposer from './ModelComposer';
 
-const Company = stampit().props({
-    query: {
+const Companies = ModelComposer( 'companies',
+    Finder({
         fields: [
             'address',
             'code',
@@ -19,7 +20,7 @@ const Company = stampit().props({
             'apifields'
         ],
         filters: {
-            apifields: [],
+            apifields: {},
             apifieldsmode: 'any',
             divisionid: null,
             id: [],
@@ -41,9 +42,34 @@ const Company = stampit().props({
             sortby: 'name',
             sortorder: 'asc'
         }
+    }),
+    Creator({
+        data: {
+            name: null,
+            type: null,
+            address1: null,
+            address2: null,
+            address3: null,
+            apifields: {},
+            city: null,
+            code: null,
+            country: null,
+            email: null,
+            facebook: null,
+            fax: null,
+            linkedin: null,
+            phone: null,
+            state: null,
+            tagid: null,
+            twitter: null,
+            zipcode: null
+        },
+        required: [
+            'name',
+            'type'
+        ]
     }
-});
+));
 
-const CompanyQueryObject = Company.compose(QueryObject);
 
-export default CompanyQueryObject;
+export default Companies;

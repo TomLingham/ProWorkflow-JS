@@ -1,6 +1,13 @@
 import ProWorkflow from "./local.config";
 
 
-ProWorkflow.Company.filter('id', [3, 5, 7]).get();
-
-console.log();
+console.log(
+    ProWorkflow.Companies
+        .create({
+            name: 'Test Companu',
+            apifields: {
+                43: 500,
+                55: 'Here is a description'
+            }
+        })
+);

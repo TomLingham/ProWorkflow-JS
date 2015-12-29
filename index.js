@@ -1,27 +1,30 @@
-import stampit from 'stampit';
-import CompanyQueryObject  from './Parts/CompanyQuery';
+import Companies  from './Parts/Companies';
+import Contacts  from './Parts/Contacts';
 
 
-const ProWorkflow = stampit().init(({ instance })=>{
+const ProWorkflow = ( config )=>{
 
-    instance.Company = CompanyQueryObject( instance )
+    config = Object.assign({}, config);
 
-}).methods({
+    return {
 
-    setup( apikey = null, email = null, password = null ){
+        setup( apikey = null, email = null, password = null ){
 
-        if (apikey && email && password) {
-            this.config.auth = {
-                apikey: apikey,
-                email: email,
-                password: password
-            };
-        }
+            if (apikey && email && password) {
+                config.auth = {
+                    apikey: apikey,
+                    email: email,
+                    password: password
+                };
+            }
 
-        console.error("Must enter all credentials during setup.")
+            console.error("Must enter all credentials during setup.")
+        },
+
+        Companies: Companies( config ),
+        Contacts: Contacts( config )
     }
-
-});
+};
 
 
 export default ProWorkflow;
