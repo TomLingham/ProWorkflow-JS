@@ -1,13 +1,8 @@
-module.exports =  {
-
+module.exports = {
     baseurl: "https://api.proworkflow.com/",
-
     auth: {
-        key: null,
-
-        user: null,
-
+        apikey: null,
+        email: null,
         password: null
     }
-
 };

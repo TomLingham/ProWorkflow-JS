@@ -2,29 +2,29 @@ import Companies  from './Parts/Companies';
 import Contacts  from './Parts/Contacts';
 
 
-const ProWorkflow = ( config )=>{
+const ProWorkflow = ()=>{
 
-    config = Object.assign({}, config);
+    let defaults = require('./config');
 
-    return {
 
-        setup( apikey = null, email = null, password = null ){
-
-            if (apikey && email && password) {
-                config.auth = {
-                    apikey: apikey,
-                    email: email,
-                    password: password
-                };
-            }
-
-            console.error("Must enter all credentials during setup.")
-        },
-
-        Companies: Companies( config ),
-        Contacts: Contacts( config )
+    function loadModels( config ){
+        this.Companies = Companies( config );
+        this.Contacts  = Contacts( config );
     }
+
+
+    let publicApi = {
+
+        setup( config ){
+            config = Object.assign(defaults, config);
+
+            loadModels.call(publicApi, config)
+        }
+
+    };
+
+    return publicApi;
 };
 
 
-export default ProWorkflow;
+export default ProWorkflow();
